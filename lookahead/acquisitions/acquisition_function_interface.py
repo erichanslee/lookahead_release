@@ -15,7 +15,7 @@ class AcquisitionFunctionInterface(object):
     # There are some seeds that could be problems for this, I think (if the point [0, 0] is in)
     def low_discrepancy_points(self, num, seed=1234):
         measure = qp.Gaussian(qp.Sobol(dimension=self.horizon, seed=seed))
-        points = measure.gen_mimic_samples(n=2 ** np.ceil(np.log2(num)))[:num]
+        points = measure.gen_samples(n=2 ** np.ceil(np.log2(num)))[:num]
         points = np.nan_to_num(points)
         assert not np.any(np.isnan(points))
         return points
